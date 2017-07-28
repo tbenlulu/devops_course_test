@@ -14,9 +14,9 @@ pipeline {
     stage('test') {
       steps {
         sh 'docker run -d --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
-	sh 'curl -I -f http://172.25.1.1:5555'
-	sh 'docker kill hello'
-	sh 'docker rm hello'
+        sh 'curl -I -f http://172.25.1.1:5555'
+        sh 'docker kill hello'
+        sh 'docker rm hello'
       }
     }
     stage('deploy') {
@@ -29,7 +29,5 @@ pipeline {
         sh 'curl -I -f http://172.25.1.1:5555'
       }
     }
-
-
   }
 }
