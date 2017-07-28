@@ -8,7 +8,16 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'docker build -t hello:0.0.1 .'
+        parallel(
+          "build": {
+            sh 'docker build -t hello:0.0.1 .'
+            
+          },
+          "": {
+            sh 'hostname'
+            
+          }
+        )
       }
     }
     stage('test') {
