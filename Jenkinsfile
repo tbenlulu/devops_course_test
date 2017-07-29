@@ -37,6 +37,8 @@ pipeline {
             
           },
           "prod-test": {
+            sh 'docker ps'
+            sleep 15
             sh 'curl -I -f http://172.25.1.1:5555'
             sh 'docker kill hello'
             sh 'docker rm hello'
