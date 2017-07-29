@@ -9,6 +9,7 @@ pipeline {
     stage('build') {
       steps {
         sh 'docker build -t hello:0.0.1 .'
+        sh 'ip addr'
       }
     }
     stage('test') {
