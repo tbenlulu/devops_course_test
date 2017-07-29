@@ -18,9 +18,7 @@ pipeline {
             sh 'docker run -d --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
             
           },
-          "Test": {
-            sh 'docker ps'
-            sleep 10
+          "test": {
             sh 'curl -f -I http://172.25.1.1:5555'
             sh 'docker kill hello'
             sh 'docker rm hello'
@@ -31,12 +29,16 @@ pipeline {
     }
     stage('deploy') {
       steps {
-        sh 'docker run -d --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
-      }
-    }
-    stage('prod-test') {
-      steps {
-        sh 'curl -I -f http://172.25.1.1:5555'
+        parallel(
+          "deploy": {
+            sh 'docker run -d --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
+            
+          },
+          "prod-test": {
+            sh 'curl -I -f http://172.25.1.1:5555'
+            
+          }
+        )
       }
     }
   }
