@@ -15,7 +15,7 @@ pipeline {
       steps {
         parallel(
           "run": {
-            sh 'docker run -d --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
+            sh 'docker run --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
             
           },
           "test": {
