@@ -9,6 +9,7 @@ pipeline {
     stage('build') {
       steps {
         sh 'docker build -t hello:0.0.1 .'
+        sh 'curl -f -I http://172.25.1.1:5555'
       }
     }
     stage('test') {
