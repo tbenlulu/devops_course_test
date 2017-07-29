@@ -13,7 +13,7 @@ pipeline {
     }
     stage('test') {
       steps {
-        sh 'docker run -d --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
+        sh 'docker run --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
         sh 'docker ps'
         sleep 60
         sh 'docker kill hello'
