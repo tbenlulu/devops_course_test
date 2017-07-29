@@ -36,6 +36,8 @@ pipeline {
           },
           "prod-test": {
             sh 'curl -I -f http://172.25.1.1:5555'
+            sh 'docker kill hello'
+            sh 'docker rm hello'
             
           }
         )
