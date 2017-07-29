@@ -15,12 +15,14 @@ pipeline {
       steps {
         parallel(
           "run": {
-            sh 'docker run -d=true --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
+            sh 'docker run -d --network=build-network --ip=172.25.1.1 --name hello hello:0.0.1'
             
           },
           "test": {
+            sh 'docker ps'
+            sleep 10
             sh 'curl -f -I http://172.25.1.1:5555'
-            sh 'docker kill hello'
+            sh 'docker stop hello'
             sh 'docker rm hello'
             
           }
